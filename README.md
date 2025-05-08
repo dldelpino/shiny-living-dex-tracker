@@ -1,3 +1,3 @@
 Este proyecto consiste en una tabla que permite almacenar datos sobre una colección de Pokémon variocolores. El botón *Guardar datos* descarga un archivo JSON con toda la información de la tabla. El botón *Cargar datos* introduce en la tabla los datos almacenados en los archivos JSON generados por el botón *Guardar datos*. En el futuro se planea:
-- Revisar el código para que la tabla se cargue más rápido.
+- Revisar el código para que la tabla cargue más rápido.
 - Implementar un modo de vista por cajas.
