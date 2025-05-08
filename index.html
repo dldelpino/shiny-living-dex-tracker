@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"> <!-- fuente -->
+    <title>Shiny Living Dex</title>
+</head>
+<body>
+    <header>
+        <div id="header-content">
+            <div id="title"><img src="images/box.png">SHINY LIVING DEX</div>
+            <div id="buttons-container">
+                <button id="saveDataBtn" class="Btn">Guardar datos</button>
+                <input type="file" id="loadDataInput" style="display: none;">
+                <button id="loadDataBtn" class="Btn">Cargar datos</button>
+            </div>
+        </div>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th><div class="table-header-content">N.º</div></th>
+                <th><div class="table-header-content">Pokémon</div></th>
+                <th style="width: 90px"><div class="table-header-content">Nombre</div></th>
+                <th><div class="table-header-content">Capturado</div></th>
+                <th><div class="table-header-content">Ubicación</div></th>
+                <th><div class="table-header-content">Origen</div></th>
+                <th><div class="table-header-content">Método</div></th>
+                <th><div class="table-header-content">Poké Ball</div></th>
+                <th><div class="table-header-content">Fecha</div></th>
+            </tr>
+        </thead>
+        <tbody id="pokemonTableBody">
+            
+        </tbody>
+    </table>
+
+    <template id="commonColumnsTemplate">
+        <td><input type="checkbox"></td>
+        <td>
+            <div class="dropdown locations">
+                <div class="dropdown-display">
+                    <img src="" class="dropdown-display-img hidden">
+                    <span class="dropdown-display-text"></span>
+                    <button class="clear-button">✖</button>
+                    <button class="dropdown-arrow">▼</button>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" data-img="images/game-icons/pokemon-rojo.png" data-text="Pokémon Rojo">
+                        <img src="images/game-icons/pokemon-rojo.png">
+                        Pokémon Rojo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-azul.png" data-text="Pokémon Azul">
+                        <img src="images/game-icons/pokemon-azul.png">
+                        Pokémon Azul
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-amarillo.png" data-text="Pokémon Amarillo">
+                        <img src="images/game-icons/pokemon-amarillo.png">
+                        Pokémon Amarillo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-oro.png" data-text="Pokémon Oro">
+                        <img src="images/game-icons/pokemon-oro.png">
+                        Pokémon Oro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-plata.png" data-text="Pokémon Plata">
+                        <img src="images/game-icons/pokemon-plata.png">
+                        Pokémon Plata
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-cristal.png" data-text="Pokémon Cristal">
+                        <img src="images/game-icons/pokemon-cristal.png">
+                        Pokémon Cristal
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rubi.png" data-text="Pokémon Rubí">
+                        <img src="images/game-icons/pokemon-rubi.png">
+                        Pokémon Rubí
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-zafiro.png" data-text="Pokémon Zafiro">
+                        <img src="images/game-icons/pokemon-zafiro.png">
+                        Pokémon Zafiro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-esmeralda.png" data-text="Pokémon Esmeralda">
+                        <img src="images/game-icons/pokemon-esmeralda.png">
+                        Pokémon Esmeralda
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rojo-fuego.png" data-text="Pokémon Rojo Fuego">
+                        <img src="images/game-icons/pokemon-rojo-fuego.png">
+                        Pokémon Rojo Fuego
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-verde-hoja.png" data-text="Pokémon Verde Hoja">
+                        <img src="images/game-icons/pokemon-verde-hoja.png">
+                        Pokémon Verde Hoja
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-diamante.png" data-text="Pokémon Diamante">
+                        <img src="images/game-icons/pokemon-diamante.png">
+                        Pokémon Diamante
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-perla.png" data-text="Pokémon Perla">
+                        <img src="images/game-icons/pokemon-perla.png">
+                        Pokémon Perla
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-platino.png" data-text="Pokémon Platino">
+                        <img src="images/game-icons/pokemon-platino.png">
+                        Pokémon Platino
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-oro-heartgold.png" data-text="Pokémon Oro HeartGold">
+                        <img src="images/game-icons/pokemon-oro-heartgold.png">
+                        Pokémon Oro HeartGold
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-plata-soulsilver.png" data-text="Pokémon Plata SoulSilver">
+                        <img src="images/game-icons/pokemon-plata-soulsilver.png">
+                        Pokémon Plata Soulsilver
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-negro.png" data-text="Pokémon Negro">
+                        <img src="images/game-icons/pokemon-negro.png">
+                        Pokémon Negro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-blanco.png" data-text="Pokémon Blanco">
+                        <img src="images/game-icons/pokemon-blanco.png">
+                        Pokémon Blanco
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-negro-2.png" data-text="Pokémon Negro 2">
+                        <img src="images/game-icons/pokemon-negro-2.png">
+                        Pokémon Negro 2
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-blanco-2.png" data-text="Pokémon Blanco 2">
+                        <img src="images/game-icons/pokemon-blanco-2.png">
+                        Pokémon Blanco 2
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-x.png" data-text="Pokémon X">
+                        <img src="images/game-icons/pokemon-x.png">
+                        Pokémon X
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-y.png" data-text="Pokémon Y">
+                        <img src="images/game-icons/pokemon-y.png">
+                        Pokémon Y
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rubi-omega.png" data-text="Pokémon Rubí Omega">
+                        <img src="images/game-icons/pokemon-rubi-omega.png">
+                        Pokémon Rubí Omega
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-zafiro-alfa.png" data-text="Pokémon Zafiro Alfa">
+                        <img src="images/game-icons/pokemon-zafiro-alfa.png">
+                        Pokémon Zafiro Alfa
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-sol.png" data-text="Pokémon Sol">
+                        <img src="images/game-icons/pokemon-sol.png">
+                        Pokémon Sol
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-luna.png" data-text="Pokémon Luna">
+                        <img src="images/game-icons/pokemon-luna.png">
+                        Pokémon Luna
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-ultrasol.png" data-text="Pokémon Ultrasol">
+                        <img src="images/game-icons/pokemon-ultrasol.png">
+                        Pokémon Ultrasol
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-ultraluna.png" data-text="Pokémon Ultraluna">
+                        <img src="images/game-icons/pokemon-ultraluna.png">
+                        Pokémon Ultraluna
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-lets-go-pikachu.png" data-text="Pokémon: Let's Go, Pikachu!">
+                        <img src="images/game-icons/pokemon-lets-go-pikachu.png">
+                        Pokémon: Let's Go, Pikachu!
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-lets-go-eevee.png" data-text="Pokémon: Let's Go, Eevee!">
+                        <img src="images/game-icons/pokemon-lets-go-eevee.png">
+                        Pokémon: Let's Go, Eevee!
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-espada.png" data-text="Pokémon Espada">
+                        <img src="images/game-icons/pokemon-espada.png">
+                        Pokémon Espada
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-escudo.png" data-text="Pokémon Escudo">
+                        <img src="images/game-icons/pokemon-escudo.png">
+                        Pokémon Escudo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-diamante-brillante.png" data-text="Pokémon Diamante Brillante">
+                        <img src="images/game-icons/pokemon-diamante-brillante.png">
+                        Pokémon Diamante Brillante
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-perla-reluciente.png" data-text="Pokémon Perla Reluciente">
+                        <img src="images/game-icons/pokemon-perla-reluciente.png">
+                        Pokémon Perla Reluciente
+                    </a>
+                    <a href="#" data-img="images/game-icons/leyendas-pokemon-arceus.png" data-text="Leyendas Pokémon: Arceus">
+                        <img src="images/game-icons/leyendas-pokemon-arceus.png">
+                        Leyendas Pokémon: Arceus 
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-escarlata.png" data-text="Pokémon Escarlata">
+                        <img src="images/game-icons/pokemon-escarlata.png">
+                        Pokémon Escarlata
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-purpura.png" data-text="Pokémon Púrpura">
+                        <img src="images/game-icons/pokemon-purpura.png">
+                        Pokémon Púrpura
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-go.png" data-text="Pokémon GO">
+                        <img src="images/game-icons/pokemon-go.png">
+                        Pokémon GO
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-home.png" data-text="Pokémon HOME">
+                        <img src="images/game-icons/pokemon-home.png">
+                        Pokémon HOME
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="dropdown origins">
+                <div class="dropdown-display">
+                    <img src="" class="dropdown-display-img hidden">
+                    <span class="dropdown-display-text"></span>
+                    <button class="clear-button">✖</button>
+                    <button class="dropdown-arrow">▼</button>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" data-img="images/game-icons/pokemon-rojo.png" data-text="Pokémon Rojo">
+                        <img src="images/game-icons/pokemon-rojo.png">
+                        Pokémon Rojo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-azul.png" data-text="Pokémon Azul">
+                        <img src="images/game-icons/pokemon-azul.png">
+                        Pokémon Azul
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-amarillo.png" data-text="Pokémon Amarillo">
+                        <img src="images/game-icons/pokemon-amarillo.png">
+                        Pokémon Amarillo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-oro.png" data-text="Pokémon Oro">
+                        <img src="images/game-icons/pokemon-oro.png">
+                        Pokémon Oro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-plata.png" data-text="Pokémon Plata">
+                        <img src="images/game-icons/pokemon-plata.png">
+                        Pokémon Plata
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-cristal.png" data-text="Pokémon Cristal">
+                        <img src="images/game-icons/pokemon-cristal.png">
+                        Pokémon Cristal
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rubi.png" data-text="Pokémon Rubí">
+                        <img src="images/game-icons/pokemon-rubi.png">
+                        Pokémon Rubí
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-zafiro.png" data-text="Pokémon Zafiro">
+                        <img src="images/game-icons/pokemon-zafiro.png">
+                        Pokémon Zafiro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-esmeralda.png" data-text="Pokémon Esmeralda">
+                        <img src="images/game-icons/pokemon-esmeralda.png">
+                        Pokémon Esmeralda
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rojo-fuego.png" data-text="Pokémon Rojo Fuego">
+                        <img src="images/game-icons/pokemon-rojo-fuego.png">
+                        Pokémon Rojo Fuego
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-verde-hoja.png" data-text="Pokémon Verde Hoja">
+                        <img src="images/game-icons/pokemon-verde-hoja.png">
+                        Pokémon Verde Hoja
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-diamante.png" data-text="Pokémon Diamante">
+                        <img src="images/game-icons/pokemon-diamante.png">
+                        Pokémon Diamante
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-perla.png" data-text="Pokémon Perla">
+                        <img src="images/game-icons/pokemon-perla.png">
+                        Pokémon Perla
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-platino.png" data-text="Pokémon Platino">
+                        <img src="images/game-icons/pokemon-platino.png">
+                        Pokémon Platino
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-oro-heartgold.png" data-text="Pokémon Oro HeartGold">
+                        <img src="images/game-icons/pokemon-oro-heartgold.png">
+                        Pokémon Oro HeartGold
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-plata-soulsilver.png" data-text="Pokémon Plata SoulSilver">
+                        <img src="images/game-icons/pokemon-plata-soulsilver.png">
+                        Pokémon Plata Soulsilver
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-negro.png" data-text="Pokémon Negro">
+                        <img src="images/game-icons/pokemon-negro.png">
+                        Pokémon Negro
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-blanco.png" data-text="Pokémon Blanco">
+                        <img src="images/game-icons/pokemon-blanco.png">
+                        Pokémon Blanco
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-negro-2.png" data-text="Pokémon Negro 2">
+                        <img src="images/game-icons/pokemon-negro-2.png">
+                        Pokémon Negro 2
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-blanco-2.png" data-text="Pokémon Blanco 2">
+                        <img src="images/game-icons/pokemon-blanco-2.png">
+                        Pokémon Blanco 2
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-x.png" data-text="Pokémon X">
+                        <img src="images/game-icons/pokemon-x.png">
+                        Pokémon X
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-y.png" data-text="Pokémon Y">
+                        <img src="images/game-icons/pokemon-y.png">
+                        Pokémon Y
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-rubi-omega.png" data-text="Pokémon Rubí Omega">
+                        <img src="images/game-icons/pokemon-rubi-omega.png">
+                        Pokémon Rubí Omega
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-zafiro-alfa.png" data-text="Pokémon Zafiro Alfa">
+                        <img src="images/game-icons/pokemon-zafiro-alfa.png">
+                        Pokémon Zafiro Alfa
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-sol.png" data-text="Pokémon Sol">
+                        <img src="images/game-icons/pokemon-sol.png">
+                        Pokémon Sol
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-luna.png" data-text="Pokémon Luna">
+                        <img src="images/game-icons/pokemon-luna.png">
+                        Pokémon Luna
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-ultrasol.png" data-text="Pokémon Ultrasol">
+                        <img src="images/game-icons/pokemon-ultrasol.png">
+                        Pokémon Ultrasol
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-ultraluna.png" data-text="Pokémon Ultraluna">
+                        <img src="images/game-icons/pokemon-ultraluna.png">
+                        Pokémon Ultraluna
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-lets-go-pikachu.png" data-text="Pokémon: Let's Go, Pikachu!">
+                        <img src="images/game-icons/pokemon-lets-go-pikachu.png">
+                        Pokémon: Let's Go, Pikachu!
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-lets-go-eevee.png" data-text="Pokémon: Let's Go, Eevee!">
+                        <img src="images/game-icons/pokemon-lets-go-eevee.png">
+                        Pokémon: Let's Go, Eevee!
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-espada.png" data-text="Pokémon Espada">
+                        <img src="images/game-icons/pokemon-espada.png">
+                        Pokémon Espada
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-escudo.png" data-text="Pokémon Escudo">
+                        <img src="images/game-icons/pokemon-escudo.png">
+                        Pokémon Escudo
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-diamante-brillante.png" data-text="Pokémon Diamante Brillante">
+                        <img src="images/game-icons/pokemon-diamante-brillante.png">
+                        Pokémon Diamante Brillante
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-perla-reluciente.png" data-text="Pokémon Perla Reluciente">
+                        <img src="images/game-icons/pokemon-perla-reluciente.png">
+                        Pokémon Perla Reluciente
+                    </a>
+                    <a href="#" data-img="images/game-icons/leyendas-pokemon-arceus.png" data-text="Leyendas Pokémon: Arceus">
+                        <img src="images/game-icons/leyendas-pokemon-arceus.png">
+                        Leyendas Pokémon: Arceus 
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-escarlata.png" data-text="Pokémon Escarlata">
+                        <img src="images/game-icons/pokemon-escarlata.png">
+                        Pokémon Escarlata
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-purpura.png" data-text="Pokémon Púrpura">
+                        <img src="images/game-icons/pokemon-purpura.png">
+                        Pokémon Púrpura
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-go.png" data-text="Pokémon GO">
+                        <img src="images/game-icons/pokemon-go.png">
+                        Pokémon GO
+                    </a>
+                    <a href="#" data-img="images/game-icons/pokemon-home.png" data-text="Pokémon HOME">
+                        <img src="images/game-icons/pokemon-home.png">
+                        Pokémon HOME
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="dropdown methods">
+                <div class="dropdown-display">
+                    <img src="" class="dropdown-display-img hidden">
+                    <span class="dropdown-display-text"></span>
+                    <button class="clear-button">✖</button>
+                    <button class="dropdown-arrow">▼</button>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" data-img="" data-text="Aparición masiva">
+                        <img src="" class="hidden">
+                        Aparición masiva
+                    </a>
+                    <a href="#" data-img="" data-text="Aparición supermasiva">
+                        <img src="" class="hidden">
+                        Aparición supermasiva
+                    </a>
+                    <a href="#" data-img="" data-text="Aventura Dinamax">
+                        <img src="" class="hidden">
+                        Aventura Dinamax
+                    </a>
+                    <a href="#" data-img="" data-text="Bocadillo">
+                        <img src="" class="hidden">
+                        Bocadillo
+                    </a>
+                    <a href="#" data-img="" data-text="Cadena de Pokémon aurales">
+                        <img src="" class="hidden">
+                        Cadena de Pokémon aurales
+                    </a>
+                    <a href="#" data-img="" data-text="Cadena de refuerzos">
+                        <img src="" class="hidden">
+                        Cadena de refuerzos
+                    </a>
+                    <a href="#" data-img="" data-text="Colonia">
+                        <img src="" class="hidden">
+                        Colonia
+                    </a>
+                    <a href="#" data-img="" data-text="Crianza con Ditto variocolor">
+                        <img src="" class="hidden">
+                        Crianza con Ditto variocolor
+                    </a>
+                    <a href="#" data-img="" data-text="DexNav">
+                        <img src="" class="hidden">
+                        DexNav
+                    </a>
+                    <a href="#" data-img="" data-text="Día de Investigación">
+                        <img src="" class="hidden">
+                        Día de Investigación
+                    </a>
+                    <a href="#" data-img="" data-text="Día de la Comunidad">
+                        <img src="" class="hidden">
+                        Día de la Comunidad
+                    </a>
+                    <a href="#" data-img="" data-text="Evento">
+                        <img src="" class="hidden">
+                        Evento
+                    </a>
+                    <a href="#" data-img="" data-text="Grutas del Subsuelo">
+                        <img src="" class="hidden">
+                        Grutas del Subsuelo
+                    </a>
+                    <a href="#" data-img="" data-text="Horda">
+                        <img src="" class="hidden">
+                        Horda
+                    </a>
+                    <a href="#" data-img="" data-text="Huevo">
+                        <img src="" class="hidden">
+                        Huevo
+                    </a>
+                    <a href="#" data-img="" data-text="Huevo extraño">
+                        <img src="" class="hidden">
+                        Huevo extraño
+                    </a>
+                    <a href="#" data-img="" data-text="Incursión">
+                        <img src="" class="hidden">
+                        Incursión
+                    </a>
+                    <a href="#" data-img="" data-text="Incursión Dinamax">
+                        <img src="" class="hidden">
+                        Incursión Dinamax
+                    </a>
+                    <a href="#" data-img="" data-text="Método Masuda">
+                        <img src="" class="hidden">
+                        Método Masuda
+                    </a>
+                    <a href="#" data-img="" data-text="Pesca en cadena">
+                        <img src="" class="hidden">
+                        Pesca en cadena
+                    </a>
+                    <a href="#" data-img="" data-text="Poké Radar">
+                        <img src="" class="hidden">
+                        Poké Radar
+                    </a>
+                    <a href="#" data-img="" data-text="Poké Resort">
+                        <img src="" class="hidden">
+                        Poké Resort
+                    </a>
+                    <a href="#" data-img="" data-text="Racha de capturas">
+                        <img src="" class="hidden">
+                        Racha de capturas
+                    </a>
+                    <a href="#" data-img="" data-text="Safari Amistad">
+                        <img src="" class="hidden">
+                        Safari Amistad
+                    </a>
+                    <a href="#" data-img="" data-text="Salvaje">
+                        <img src="" class="hidden">
+                        Salvaje
+                    </a>
+                    <a href="#" data-img="" data-text="Soft reset">
+                        <img src="" class="hidden">
+                        Soft reset
+                    </a>
+                    <a href="#" data-img="" data-text="Ultraumbral">
+                        <img src="" class="hidden">
+                        Ultraumbral
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="dropdown balls">
+                <div class="dropdown-display">
+                    <img src="" class="dropdown-display-img hidden">
+                    <span class="dropdown-display-text"></span>
+                    <button class="clear-button">✖</button>
+                    <button class="dropdown-arrow">▼</button>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" data-img="images/ball-icons/master.png" data-text="">
+                        <img src="images/ball-icons/master.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ultra.png" data-text="">
+                        <img src="images/ball-icons/ultra.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/super.png" data-text="">
+                        <img src="images/ball-icons/super.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/poke.png" data-text="">
+                        <img src="images/ball-icons/poke.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/safari.png" data-text="">
+                        <img src="images/ball-icons/safari.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/malla.png" data-text="">
+                        <img src="images/ball-icons/malla.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/buceo.png" data-text="">
+                        <img src="images/ball-icons/buceo.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/nido.png" data-text="">
+                        <img src="images/ball-icons/nido.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/acopio.png" data-text="">
+                        <img src="images/ball-icons/acopio.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/turno.png" data-text="">
+                        <img src="images/ball-icons/turno.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/lujo.png" data-text="">
+                        <img src="images/ball-icons/lujo.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/honor.png" data-text="">
+                        <img src="images/ball-icons/honor.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ocaso.png" data-text="">
+                        <img src="images/ball-icons/ocaso.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/sana.png" data-text="">
+                        <img src="images/ball-icons/sana.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/veloz.png" data-text="">
+                        <img src="images/ball-icons/veloz.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/gloria.png" data-text="">
+                        <img src="images/ball-icons/gloria.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/rapid.png" data-text="">
+                        <img src="images/ball-icons/rapid.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/nivel.png" data-text="">
+                        <img src="images/ball-icons/nivel.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/cebo.png" data-text="">
+                        <img src="images/ball-icons/cebo.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/peso.png" data-text="">
+                        <img src="images/ball-icons/peso.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/amor.png" data-text="">
+                        <img src="images/ball-icons/amor.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/amigo.png" data-text="">
+                        <img src="images/ball-icons/amigo.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/luna.png" data-text="">
+                        <img src="images/ball-icons/luna.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/competi.png" data-text="">
+                        <img src="images/ball-icons/competi.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ensueño.png" data-text="">
+                        <img src="images/ball-icons/ensueño.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ente.png" data-text="">
+                        <img src="images/ball-icons/ente.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/poke-hisui.png" data-text="">
+                        <img src="images/ball-icons/poke-hisui.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/super-hisui.png" data-text="">
+                        <img src="images/ball-icons/super-hisui.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ultra-hisui.png" data-text="">
+                        <img src="images/ball-icons/ultra-hisui.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/pluma.png" data-text="">
+                        <img src="images/ball-icons/pluma.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/ala.png" data-text="">
+                        <img src="images/ball-icons/ala.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/aero.png" data-text="">
+                        <img src="images/ball-icons/aero.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/peso-hisui.png" data-text="">
+                        <img src="images/ball-icons/peso-hisui.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/kilo.png" data-text="">
+                        <img src="images/ball-icons/kilo.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/quintal.png" data-text="">
+                        <img src="images/ball-icons/quintal.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/origen.png" data-text="">
+                        <img src="images/ball-icons/origen.png">
+                    </a>
+                    <a href="#" data-img="images/ball-icons/extraña.png" data-text="">
+                        <img src="images/ball-icons/extraña.png">
+                    </a>
+                </div>
+            </div>
+        </td>
+        <td><input type="date"></td>
+    </template>
+    <script src="./scripts/dropdown.js"></script>
+    <script src="./scripts/saveLoad.js"></script>
+    <script src="./scripts/table.js"></script>
+</body>
+</html>

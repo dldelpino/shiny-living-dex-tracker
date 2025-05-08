@@ -1,0 +1,325 @@
+body {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+    background-image: repeating-linear-gradient(45deg, #d2fa9f, #93e4cb 10%, #d2fa9f 20%);
+}
+
+header {
+    background-image: linear-gradient(#f0fdec, #ddf5ca);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 1px 2px #78b89c;
+}
+
+#header-content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#title {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+#title img {
+    width: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#buttons-container {
+    display: flex;
+    position: absolute;
+    right: 0; /* para mandarlo a la derecha */
+    gap: 10px;
+}
+
+.Btn {
+    font-family: Inter, sans-serif;
+    background-image: repeating-linear-gradient(45deg, #d2fa9f, #93e4cb, #d2fa9f);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 2px solid #78b89c;
+    box-shadow: 1px 2px #78b89c;
+    font-weight: bold;
+}
+
+.Btn:hover {
+    cursor: pointer;
+    background: inherit;
+}
+
+table {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 1px solid #37b6ad;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+th {
+    background: #37b6ad;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.table-header-content {
+    color: white;
+}
+
+td {
+    border: 1px solid #37b6ad;
+}
+
+tr {
+    background-color: #e8f6f1;
+}
+
+tr:nth-child(odd) {
+    background-color: #e0f1ef;
+}
+
+th:first-child {
+    border-top-left-radius: 8px;
+}
+
+th:last-child {
+    border-top-right-radius: 8px;
+}
+
+input[type="checkbox"] { /* hide default checkbox */
+    appearance: none;
+    background-color: #fff;
+    margin: auto;
+    color: currentColor;
+    width: 15px;
+    height: 15px;
+    border: 2px solid currentColor;
+    border-radius: 2px;
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]:not(:checked):hover {
+    background-color: inherit;
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+}
+
+input[type="checkbox"]::after {
+    content: '';
+    color: white;
+    font-size: 11px;
+    display: none;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✔';
+    display: block;
+    padding-bottom: 1px; /* chapucilla para que el tick esté justo en el centro de la caja*/
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.dropdown.locations, .dropdown.origins {
+    width: 270px;
+}
+
+.dropdown.methods {
+    width: 225px;
+}
+
+.dropdown.balls{
+    width: 92px;
+}
+
+.dropdown .dropdown-display {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    background-color: inherit;
+}
+
+.dropdown.locations .dropdown-display-img, .dropdown.origins .dropdown-display-img {
+    visibility: hidden; /* oculta la imagen inicialmente */
+    border-radius: 5px;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.dropdown.balls .dropdown-display-img {
+    visibility: hidden; /* oculta la imagen inicialmente */
+}
+
+
+.dropdown-display-img.hidden {
+    width: 0; /* elimina el espacio ocupado por la imagen */
+    margin-right: 0; /* elimina el margen */
+}
+
+.dropdown-display-text {
+    flex-grow: 1; /* si quito esto, se ingnora el alineado del texto por algún motivo */
+    align-self: center;
+    text-align: left;
+    visibility: hidden;
+}
+
+.dropdown-arrow {
+    padding: 5px;
+    background-color: inherit;
+    font-size: 10px;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+}
+
+.dropdown-arrow:hover {
+    background-color: #37b6ad;
+}
+
+.clear-button {
+    padding: 5px;
+    background-color: inherit;
+    font-size: 10px;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    align-self: center;
+}
+
+.clear-button:hover {
+    background-color: #37b6ad;
+}
+
+.dropdown-menu {
+    display: none; /* oculta la lista desplegable (solo debe mostrarse al pulsar en la flecha) */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 300px;
+}
+
+.dropdown.locations .dropdown-menu, .dropdown.origins .dropdown-menu {
+    overflow: auto;
+    text-align: left;
+    width: 270px !important;
+}
+
+.dropdown.methods .dropdown-menu {
+    overflow: auto;
+    text-align: left;
+    width: 240px !important;
+}
+
+.dropdown.balls .dropdown-menu {
+    grid-template-columns: repeat(7,1fr);
+}
+
+.dropdown-menu a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.dropdown-menu .empty img {
+    border: none;
+}
+
+.dropdown.locations .dropdown-menu a, .dropdown.origins .dropdown-menu a {
+    padding: 10px 10px;
+}
+
+.dropdown.methods .dropdown-menu a {
+    padding: 10px 10px;
+}
+
+.dropdown.balls .dropdown-menu a {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 13px;
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown.locations .dropdown-menu a img, .dropdown.origins .dropdown-menu a img {
+    border: 1px solid black;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 20px;
+}
+
+.dropdown.balls .dropdown-menu a img {
+    width: 20px;
+}
+
+.dropdown-menu a img .hidden {
+    display: none; /* elimina el espacio ocupado por la imagen */
+}
+
+.dropdown.locations.open .dropdown-menu, .dropdown.origins.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown.methods.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown.balls.open .dropdown-menu {
+    display: grid;
+}
+
+input[type="date"] {
+    background-color: inherit;
+    border: none;
+    font-family: Inter, sans-serif;
+    text-align: center;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
